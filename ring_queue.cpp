@@ -1,48 +1,29 @@
 #include <iostream>
 
-// Forward declaration
 template <typename ItemType, int MAX_SIZE>
 class RingQueue;
-
-
 
 template <typename ItemType, int MAX_SIZE>
 class RingQueue {
 
-	// Nested Forward declaration of RingQueue<ItemType,MAX_SIZE>::iterator
-	// This is needed if one plans to turn this home-made iterator into
-	// one of the special categories of iterators (e.g., input, output,
-	// forward, etc.).
 public:
 	class iterator;
 
-
-
-	// Aliases. 
 	typedef ItemType* pointer;
 	typedef ItemType& reference;
 
-
-
-	// Definition of RingQueue<ItemType,MAX_SIZE>::iterator
 public:
 	class iterator {
 	private:
-		// A link to the parent container 
+	
 		RingQueue * parent;
 
-		// The position within the RingQueue is determined
-		// by how far ahead we are from the begining of the
-		// queue.
 		int offset;
 
-	private:  // Private constructor???
+	private:  
 		iterator(RingQueue* _parent, int _offset = 0)
 			: parent(_parent), offset(_offset) { }
 
-
-		// It is quite common for Containers and their iterators
-		// to be friends. After all, they should work closely together.
 		friend class RingQueue<ItemType, MAX_SIZE>;
 
 
