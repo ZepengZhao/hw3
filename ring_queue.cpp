@@ -55,31 +55,8 @@ public:
 
 	};
 
-
-
-	/**
-	class const_iterator{
-	private:
-	RingQueue* parent;
-	int offset;
-
-	private:
-	// Only RingQueue objects can create const_iterators...
-	const_iterator() ;
-
-	public:
-	// ... however, const_iterators can be 'copied'.
-	const_iterator( const const_iterator& ) ;
-
-	friend class RingQueue<ItemType,MAX_SIZE>;
-	};
-	*/
-
-
-
-	// Friendship goes both ways here.
 	friend class iterator;
-	// friend class const_iterator;  // not implemented... yet.
+
 
 
 
@@ -108,32 +85,30 @@ private:
 
 
 public:
-	// Constructor
+
 	RingQueue() : begin_index(0), ring_size(0) { }
 
-	// Accessors. Note: 'back()' is not considered part of the array.
 	ItemType front() const {
-		if (ring_size == 0) std::cerr << "Warning: Empty ring!\n";
-		// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-		// Feel free to throw instead...
-		throw;
+		if (ring_size == 0)
+		{
+			std::cerr << "Warning: Empty ring!\n";
+			throw;
+		}
 
 		// Replace the line(s) below with your code.
-		return buffer[0];
+		return buffer[begin_index];
 	}
 	ItemType back() const {
-		if (ring_size == 0) std::cerr << "Warning: Empty ring!\n";
-		// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-		// Feel free to throw instead...
-		throw;
+		if (ring_size == 0)
+		{
+			std::cerr << "Warning: Empty ring!\n";
+			throw;
+		}
 
 		// Replace the line(s) below with your code.
-		return buffer[0];
+		return buffer[end_index];
 	}
 
-
-
-	// Mutators
 	void push_back(const ItemType& value) {
 		return;
 	}
@@ -180,7 +155,6 @@ int main() {
 
 	std::cout << "Queue via size: \n";
 
-	// RingQueue<int,7>::iterator it = rq.begin() ; 
 	auto it = rq.begin();
 	for (size_t i = 0; i < rq.size(); ++i) {
 		std::cout << "Value: " << *it << ", address: " << &(*it) << '\n';
