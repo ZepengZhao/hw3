@@ -78,8 +78,8 @@ private:
 	// A helper function that computes the index of 'the end'
 	// of the RingQueue
 	int end_index() const {
-		// Replace the line(s) below with your code.
-		return begin_index;
+		
+		return (begin_index +ring_size)%MAX_SIZE;
 	}
 
 
@@ -110,9 +110,24 @@ public:
 	}
 
 	void push_back(const ItemType& value) {
+		buffer[end_index()] = value;
+		if(end_index()<MAX_SIZE)
+		ring_size++;
+		else
+		{
+			if (begin_index < MAX_SIZE)
+				begin_index++;
+			else
+				begin_index = 0;
+		}
+
 		return;
 	}
 	void pop_front() {
+		begin_index++;
+		ring_size--;
+		if (begin_index == MAX_SIZE)
+			begin_index = 0;
 		return;
 	}
 
