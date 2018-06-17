@@ -30,7 +30,7 @@ public:
 	public:
 		reference operator*() {
 			// Replace the line(s) below with your code.
-			return parent->buffer[0];
+			return parent->buffer[(parent->begin_index + offset) % MAX_SIZE];
 		}
 
 		iterator& operator++() {
@@ -61,25 +61,11 @@ public:
 
 
 private:
-	// A fixed-size static array with constant capacity that represents 
-	// the RingQueue
 	ItemType buffer[MAX_SIZE];
-
-	// The starting index. It changes according to a very 
-	// specific set of rules (below).
-	int begin_index;
-
-	// The actual size of the RingQueue. Not to be confused with
-	// its capacity. 
+	int begin_index; 
 	int ring_size;
-
-
-
-	// A helper function that computes the index of 'the end'
-	// of the RingQueue
 	int end_index() const {
-		
-		return (begin_index +ring_size)%MAX_SIZE;
+		return (begin_index +ring_size) % MAX_SIZE;
 	}
 
 
@@ -94,8 +80,6 @@ public:
 			std::cerr << "Warning: Empty ring!\n";
 			throw;
 		}
-
-		// Replace the line(s) below with your code.
 		return buffer[begin_index];
 	}
 	ItemType back() const {
@@ -104,9 +88,7 @@ public:
 			std::cerr << "Warning: Empty ring!\n";
 			throw;
 		}
-
-		// Replace the line(s) below with your code.
-		return buffer[end_index];
+		return buffer[end_index()];
 	}
 
 	void push_back(const ItemType& value) {
@@ -120,9 +102,9 @@ public:
 			else
 				begin_index = 0;
 		}
-
 		return;
 	}
+
 	void pop_front() {
 		begin_index++;
 		ring_size--;
@@ -131,23 +113,16 @@ public:
 		return;
 	}
 
-	// Functions that return iterators
+
 	iterator begin() {
-		// Replace the line(s) below with your code.
-		return iterator(this, 0);
+		return iterator(this,0);
 	}
 	iterator end() {
-		// Replace the line(s) below with your code.
-		return iterator(this, 0);
+		return iterator(this, ring_size);
 	}
-
-	// Miscellaneous functions
 	size_t size() const {
-		// Replace the line(s) below with your code.
-		return 0;
+		return ring_size;
 	}
-
-	// Debugging functions
 	void dump_queue() const {
 		std::cout << "Raw queue...\n";
 		for (size_t i = 0; i < MAX_SIZE; ++i)
