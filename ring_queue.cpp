@@ -116,7 +116,7 @@ public:
 		if (ring_size == 0) std::cerr << "Warning: Empty ring!\n";
 		// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 		// Feel free to throw instead...
-
+		throw;
 
 		// Replace the line(s) below with your code.
 		return buffer[0];
@@ -125,7 +125,7 @@ public:
 		if (ring_size == 0) std::cerr << "Warning: Empty ring!\n";
 		// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 		// Feel free to throw instead...
-
+		throw;
 
 		// Replace the line(s) below with your code.
 		return buffer[0];
