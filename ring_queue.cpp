@@ -35,14 +35,15 @@ public:
 		iterator& operator++() {
 			iterator temp = *this;
 			offset++;
-			if (offset == MAX_SIZE) { offset = 0; }
+			if (offset == MAX_SIZE) 
+				offset = 0; 
 			return temp;
-			return *this;
 		}
 
 		iterator operator++(int unused) {
 			offset++;;
-			if (offset == MAX_SIZE) { offset = 0; }
+			if (offset == MAX_SIZE)  
+				offset = 0; 
 			return *this;
 		}
 
@@ -99,7 +100,7 @@ public:
 		ring_size++;
 		else
 		{
-			if (begin_index < MAX_SIZE)
+			if (begin_index != MAX_SIZE)
 				begin_index++;
 			else
 				begin_index = 0;
