@@ -29,28 +29,30 @@ public:
 
 	public:
 		reference operator*() {
-			// Replace the line(s) below with your code.
 			return parent->buffer[(parent->begin_index + offset) % MAX_SIZE];
 		}
 
 		iterator& operator++() {
-			// Replace the line(s) below with your code.
+			iterator temp = *this;
+			offset++;
+			if (offset == MAX_SIZE) { offset = 0; }
+			return temp;
 			return *this;
 		}
 
 		iterator operator++(int unused) {
-			// Replace the line(s) below with your code.
+			offset++;;
+			if (offset == MAX_SIZE) { offset = 0; }
 			return *this;
 		}
 
 		bool operator==(const iterator& rhs) const {
-			// Replace the line(s) below with your code.
-			return true;
+			return parent == rhs.parent && offset == rhs.offset;
+			
 		}
 
 		bool operator!=(const iterator& rhs) const {
-			// Replace the line(s) below with your code.
-			return true;
+			return parent != rhs.parent || offset != rhs.offset;
 		}
 
 	};
@@ -93,7 +95,7 @@ public:
 
 	void push_back(const ItemType& value) {
 		buffer[end_index()] = value;
-		if(end_index()<MAX_SIZE)
+		if(ring_size<MAX_SIZE)
 		ring_size++;
 		else
 		{
@@ -158,13 +160,13 @@ int main() {
 	// implementation of RingQueue<ItemType,int>::end(). 
 	// If the implementation is not correct, it might result in 
 	// an infinite loop.
-	/**
+	
 	std::cout << "Queue via iterators: \n";
 	for ( auto it = rq.begin() ; it != rq.end() ; ++it ) {
 	std::cout << "Value: " << *it << ", address: " << &(*it) << '\n';
 	}
 	std::cout << '\n';
-	*/
+	
 
 
 
